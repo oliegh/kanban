@@ -19,9 +19,9 @@ function App() {
     { id: "3" },
   ])
   const [cards2, setCards2] = useState([
-    { id: "4" },
-    { id: "5" },
-    { id: "6" },
+    { id: "1" },
+    { id: "2" },
+    { id: "3" },
   ])
 
   function handleOnDragEnd(result) {
@@ -103,7 +103,6 @@ function App() {
                                         <span className="float-right">
                                           <img src={user} alt="" />
                                         </span>
-                                        
                                       </li>
                                       <li>
                                         <span>
@@ -135,7 +134,7 @@ function App() {
               <div className="board rounded m-2 col">
                 <h3>Нужно сделать</h3>
                 <div className="card-container">
-                  <Droppable droppableId="boards2">
+                  <Droppable droppableId="boards">
                     {(provided) => (
                       <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
                         {cards2.map(({id}, index) => {
