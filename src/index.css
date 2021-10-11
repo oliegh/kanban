@@ -36,6 +36,8 @@ li {
 .board-head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .card {
@@ -48,6 +50,10 @@ li {
 
 .card-body {
   cursor: auto;
+}
+
+.card-container {
+  min-height: 400px;
 }
 
 .card-watch {
@@ -110,7 +116,7 @@ li {
 }
 
 .btn-work-task {
-  padding: 3px 15px;
+  padding: 5px 15px;
   background:#F2F5FA;
 }
 

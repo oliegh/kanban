@@ -1,4 +1,5 @@
-import play2 from '../../img/play_v2.png'
+import play from '../../img/Play.png'
+import pause from '../../img/pause.png'
 import imgOk from '../../img/ok.png'
 import imgCopy from '../../img/copy.png'
 import imgDate from '../../img/date_image.png'
@@ -7,19 +8,24 @@ import user from '../../img/user.png'
 import user2 from '../../img/new_user.png'
 import add from '../../img/add.png'
 import notCompleted from '../../img/not_completed.png'
-import completed from '../../img/completed.png'
 
 
-export const Modal = ({ state, modalOption, showModal, closeModal }) => {
+export const Modal = ({ state, modalOption, closeModal, clickHandler }) => {
 
   const card = state[modalOption.indexBoard].cards[modalOption.indexCard]
-
+  console.log(card);
   return (
     <div className="modal-card">
       <div className="modal-header">
         <div>
           <a className="btn-work-task rounded-3" href="#">
-            <img src={play2} alt="" />
+            <img src={
+              card.palyTime
+                ?
+                play
+                :
+                pause
+            } alt="" />
             <span className="ms-1">Работать над задачей</span>
           </a>
           <span className="ms-3">
@@ -27,7 +33,7 @@ export const Modal = ({ state, modalOption, showModal, closeModal }) => {
           </span>
         </div>
         <div>
-          <a className=" btn-work-task btn-work-task-complete rounded-3" href="#">
+          <a onClick={event => clickHandler('statusCard', modalOption.indexBoard, modalOption.indexCard, null, event)} className={card.status ? "btn-work-task rounded-3": "btn-work-task btn-work-task-complete rounded-3"}  href="#">
             <img src={imgOk} alt="" />
             <span className="ms-1 text-white">Завершить задачу</span>
           </a>
@@ -53,7 +59,7 @@ export const Modal = ({ state, modalOption, showModal, closeModal }) => {
         </tr>
         <tr>
           <td>Описание</td>
-          <td className="w-100"><textarea className="w-100 rounded-3" placeholder="Добавьте описание к этой задаче..." rows="2"></textarea></td>
+          <td className="w-100"><textarea className="w-100 rounded-3" placeholder="Добавьте описание к этой задаче..." rows="2" value={card.description}></textarea></td>
         </tr>
       </table>
       <p>Подзадачи</p>
@@ -153,8 +159,8 @@ export const Modal = ({ state, modalOption, showModal, closeModal }) => {
           <img src={user} alt="" />
         </span>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-          <button class ="btn btn-outline-secondary" type ="button" id="button-addon2">Button</button>
+          <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" />
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
         </div>
       </div>
     </div>

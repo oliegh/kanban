@@ -84,17 +84,77 @@ export const BoardContainer = ({ onDragEnd }) => {
     setmodal(false)
   }
 
+  // что-бы не плодить кучу обработчиков, решил сделать один 
+  const clickHandler = (clickName, indexBoard, indexCard, indexSubTask, event) => {
+    event.preventDefault()
+
+    const stateCopy = [...state]
+
+    switch (clickName) {
+      case 'openListSubTask':
+        stateCopy[indexBoard].cards[indexCard].openSubTask = !stateCopy[indexBoard].cards[indexCard].openSubTask
+        setState(stateCopy)
+        // fetched
+        break
+
+      case 'statusCard':
+        stateCopy[indexBoard].cards[indexCard].status = !stateCopy[indexBoard].cards[indexCard].status
+        setState(stateCopy)
+        // fetched
+        break
+
+      case 'statusSubTask':
+        stateCopy[indexBoard].cards[indexCard].listSubTask[indexSubTask].status = !stateCopy[indexBoard].cards[indexCard].listSubTask[indexSubTask].status
+        setState(stateCopy)
+        // fetched
+        break
+
+      case 'addSubTaskDescription':
+        stateCopy[indexBoard].cards[indexCard].listSubTask.push({
+          status: false,
+          description: stateCopy[indexBoard].cards[indexCard].valueNewSubTask
+        })
+        stateCopy[indexBoard].cards[indexCard].valueNewSubTask = ''
+        setState(stateCopy)
+        // fetched
+        break
+      case 'playTime':
+        stateCopy[indexBoard].cards[indexCard].palyTime = !stateCopy[indexBoard].cards[indexCard].palyTime
+        setState(stateCopy)
+        break
+      case 'addCard':
+        stateCopy[indexBoard].cards.push({
+          id: "1",
+          status: false,
+          index: 11,
+          title: 'New card',
+          plannedTime: 'Planed Time',
+          passedTime: 'Passed Time',
+          deadline: 'date',
+          palyTime: false,
+          description: '',
+          listSubTask: [],
+          valueNewSubTask: '',
+          openSubTask: false
+        })
+        setState(stateCopy)
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <div className="row position-relative d-flex">
       <DragDropContext onDragEnd={onDragEnd}>
         {!!state.length && state.map((board, indexBoard) => (
-          <Board board={board} indexBoard={indexBoard} />
+          <Board board={board} indexBoard={indexBoard} showModal={showModal} clickHandler={clickHandler} />
         ))}
       </DragDropContext>
       <div className="board rounded m-2 col bg-white">
         <a onClick={addBoard} href="#"><img src={add} alt="" /> Добавить столбец</a>
       </div>
-      {modal && <Modal state={state} modal={modal} modalOption={modalOption} showModal={showModal} closeModal={closeModal} />}
+      {modal && <Modal state={state} modal={modal} modalOption={modalOption} clickHandler={clickHandler} closeModal={closeModal} />}
     </div>
   )
 }

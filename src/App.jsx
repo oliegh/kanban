@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import { BoardContainer } from './components/BoardContainer/BoardContainer'
 import { Sidebar } from "./components/Sidebar";
 import { Context } from "./context/context";
 import { changeTaskData, getTaskData } from "./localStorage/localStorage"

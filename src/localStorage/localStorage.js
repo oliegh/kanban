@@ -15,7 +15,7 @@ const initialState =
         passedTime: 'Passed Time',
         deadline: '12 декабря',
         palyTime: true,
-
+        description: 'Описанине задачи',
         listSubTask: [
           {
             status: false,
@@ -38,7 +38,7 @@ const initialState =
         passedTime: 'Passed Time',
         deadline: '12 декабря',
         palyTime: true,
-
+        description: '',
         listSubTask: [],
         openSubTask: false
       }
@@ -57,6 +57,7 @@ const initialState =
         passedTime: 'Passed Time',
         deadline: '12 декабря',
         palyTime: true,
+        description: '',
         listSubTask: [
           {
             status: false,
