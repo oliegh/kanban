@@ -14,25 +14,62 @@ function App() {
 
 
   const [cards, setCards] = useState([
-    { id: "1" },
-    { id: "2" },
-    { id: "3" },
+    { id: "1", index: 11 },
+    { id: "2", index: 22 },
+    { id: "3", index: 33 },
   ])
   const [cards2, setCards2] = useState([
-    { id: "1" },
-    { id: "2" },
-    { id: "3" },
+    { id: "4", index: 44 },
+    { id: "5", index: 55 },
+    { id: "6", index: 66 },
   ])
 
   function handleOnDragEnd(result) {
-    console.log(result);
-    if (!result.destination) return;
 
-    const items = Array.from(cards);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    const { source, destination } = result;
 
-    setCards(items);
+    // dropped outside the list
+    if (!destination) {
+        return;
+    }
+
+    if (source.droppableId === destination.droppableId) {
+        const items = reorder(
+            this.getList(source.droppableId),
+            source.index,
+            destination.index
+        );
+
+        let state = { items };
+
+        if (source.droppableId === 'droppable2') {
+            state = { selected: items };
+        }
+
+        this.setState(state);
+    } else {
+        const result = move(
+            this.getList(source.droppableId),
+            this.getList(destination.droppableId),
+            source,
+            destination
+        );
+
+        this.setState({
+            items: result.droppable,
+            selected: result.droppable2
+        });
+    }
+
+
+    // console.log(result);
+    // if (!result.destination) return;
+
+    // const items = Array.from(cards);
+    // const [reorderedItem] = items.splice(result.source.index, 1);
+    // items.splice(result.destination.index, 0, reorderedItem);
+
+    // setCards(items);
   }
 
   return (
@@ -43,10 +80,10 @@ function App() {
           sidebar
         </nav>
         <main className="main rounded">
-          <div className="row">
+          <div className="row d-flex">
 
             <DragDropContext onDragEnd={handleOnDragEnd}>
-              <div className="board rounded m-2 col">
+              <div className="board rounded m-2 col-3">
                 <h3>Нужно сделать</h3>
                 <div className="card-container">
                   <Droppable droppableId="boards">
@@ -103,6 +140,7 @@ function App() {
                                         <span className="float-right">
                                           <img src={user} alt="" />
                                         </span>
+                                        
                                       </li>
                                       <li>
                                         <span>
@@ -131,10 +169,10 @@ function App() {
                 </div>
               </div>
 
-              <div className="board rounded m-2 col">
+              <div className="board rounded m-2 col-3">
                 <h3>Нужно сделать</h3>
                 <div className="card-container">
-                  <Droppable droppableId="boards">
+                  <Droppable droppableId="boards2">
                     {(provided) => (
                       <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
                         {cards2.map(({id}, index) => {

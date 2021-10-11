@@ -1,4 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 a {
+  color: #B7B9BB;
   text-decoration: none;
 } 
 
@@ -26,8 +33,21 @@ li {
   background: #F2F5FA;
 }
 
+.board-head {
+  display: flex;
+  justify-content: space-between;
+}
+
 .card {
   padding: 10px;
+}
+
+.card-title {
+  color: #000;
+}
+
+.card-body {
+  cursor: auto;
 }
 
 .card-watch {
@@ -47,6 +67,9 @@ li {
 
 .card-scheme {
   padding: 0 10px;
+}
+
+.card-scheme-border {
   border-radius: 20px;
   background: #F2F5FA;
 }
@@ -61,4 +84,77 @@ li {
 }
 .list-subtask li:first-child{
   border-top: 1px solid #F1F1F1;
+}
+
+/* modal window */
+
+.modal-card {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 860px;
+  max-height: 100vh;
+  background-color: #fff;
+  box-shadow: 0px 5px 20px rgba(21, 27, 38, 0.08);
+  font-size: 14px;
+  color: #96999C;
+}
+
+.list-subtask {
+  color: #333333;
+}
+
+.modal-card .list-subtask li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-work-task {
+  padding: 3px 15px;
+  background:#F2F5FA;
+}
+
+.btn-work-task-complete {
+  background:#97C95D;
+}
+
+.modal-card table td {
+  padding: 5px 0px;
+  font-size: 14px;
+}
+
+.modal-card table td:first-child {
+  padding-right: 30px;
+}
+
+.list-comments {
+  overflow: auto;
+  max-height: 270px;
+}
+
+.list-comments li {
+  display: flex;
+  padding: 7px 0;
+  color: #333333;
+}
+
+.list-comments li{
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.list-comments li:first-child{
+  border-top: 1px solid #F1F1F1;
+}
+
+.user-name b{
+  font-style: 12px;
+}
+
+.time-out {
+  font-style: 12px;
+  color: #B7B9BB;
+}
+
+.modal-comments {
+  font-size: 14px;
 }
